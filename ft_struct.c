@@ -6,7 +6,7 @@
 /*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:48:36 by khebert           #+#    #+#             */
-/*   Updated: 2025/12/19 13:53:00 by khebert          ###   ########.fr       */
+/*   Updated: 2025/12/31 15:12:28 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ t_stack *ft_stack_new(int value)
     return (new);
 }
 
-t_stack *ft_find_last(t_stack *stack)
+t_stack *ft_last(t_stack **stack)
 {
     t_stack *temp;
 
     if (!stack)
         return (NULL);
-    temp = stack;
+    temp = *stack;
     while (temp->next != NULL)
         temp = temp->next;
     return (temp);
@@ -49,7 +49,48 @@ void    ft_addtoback(t_stack **stack, t_stack *new)
         *stack = new;
         return ;
     }
-    last = ft_find_last(*stack);
+    last = ft_last(stack);
     last->next = new;
     new->prev = last;
+}
+
+t_stack *ft_middle(t_stack **stack)
+{
+    t_stack *last;
+    t_stack *before_last;
+
+    last = ft_last(stack);
+    before_last = *stack;
+    while (before_last->next != last)
+        before_last = before_last->next;
+    return (before_last);
+}
+
+int ft_min(t_stack *stack)
+{
+    int min;
+
+    min = stack->value;
+    while (stack)
+    {
+        if (stack->value < min)
+            min = stack->value;
+        stack = stack->next;
+    }
+    return (min);
+}
+
+int find_position(t_stack *stack, int value)
+{
+    int pos;
+    
+    pos = 0;
+    while (stack)
+    {
+        if (stack->value == value)
+            return (pos);
+        pos++;
+        stack = stack->next;
+    }
+    return (-1);
 }

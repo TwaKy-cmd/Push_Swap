@@ -6,14 +6,11 @@
 /*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:48:44 by khebert           #+#    #+#             */
-/*   Updated: 2025/12/19 14:11:45 by khebert          ###   ########.fr       */
+/*   Updated: 2025/12/31 17:22:58 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
-/* Fonction enfant de FT_PARSE_ARGS afin de parser les 
-arguments si on recois un seul arg */
 
 t_stack *ft_split_args(char *argv)
 {
@@ -63,8 +60,6 @@ t_stack *ft_parse_args(int argc, char *argv[])
     return (stack_a);
 }
 
-/* function for print the stack */
-
 void    ft_print_stack(t_stack *stack)
 {
     t_stack *temp;
@@ -86,15 +81,61 @@ void    ft_print_stack(t_stack *stack)
     }
 }
 
-
 int main(int argc, char **argv)
+{
+    t_stack *stack_a;
+    t_stack *stack_b;
+    
+    if (argc >= 2)
+    {
+        stack_a = ft_parse_args(argc, argv);
+        if (argc == 3)
+        {
+            two_args(&stack_a);
+            ft_print_stack(stack_a);
+            write(1, "\n", 1);
+        }
+        free(stack_a);
+        stack_a = ft_parse_args(argc, argv);
+        if (argc == 4)
+        {
+            three_args(&stack_a);
+            ft_print_stack(stack_a);
+            write(1, "\n", 1);
+        }
+        free(stack_a);
+        stack_a = ft_parse_args(argc, argv);
+        stack_b = NULL;
+        if (argc == 6)
+        {
+            five_args(&stack_a, &stack_b);
+            ft_print_stack(stack_a);
+            write(1, "\n", 1);
+        }
+        free(stack_a);
+        free(stack_b);
+    }
+    return (0);
+}
+
+/* int main(int argc, char **argv)
 {
     t_stack *stack_a;
     
     if (argc < 2)
         return (0);
-    
     stack_a = ft_parse_args(argc, argv);
+
+    ft_putstr_fd("AVANT : ", 1);
     ft_print_stack(stack_a);
+    ft_putstr_fd("\n\nOperations :\n", 1);
+    write(1, "\n", 1);
+
+    five_args(&stack_a);
+    write(1, "\n", 1);
+    ft_putstr_fd("APRES : ", 1);
+    ft_print_stack(stack_a);
+    write(1, "\n", 1);
+    
     return (0);
-}
+} */

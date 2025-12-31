@@ -6,7 +6,7 @@
 /*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 00:10:45 by khebert           #+#    #+#             */
-/*   Updated: 2025/12/21 00:48:37 by khebert          ###   ########.fr       */
+/*   Updated: 2025/12/22 18:36:08 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    swap(t_stack **stack_a)
 void    swap_sa(t_stack **stack_a)
 {
     swap(stack_a);
-    write(1, "sa\n", 1);
+    write(1, "sa\n", 3);
 }
 
 void    swap_sb(t_stack **stack_b)

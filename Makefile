@@ -6,7 +6,7 @@
 #    By: khebert <khebert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/19 13:58:12 by khebert           #+#    #+#              #
-#    Updated: 2025/12/19 14:18:28 by khebert          ###   ########.fr        #
+#    Updated: 2025/12/22 18:14:01 by khebert          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC			=	ft_parsing.c 			\
 				ft_rotate.c 			\
 				ft_struct.c 			\
 				ft_swap.c 				\
+				ft_condition.c			\
 	
 OBJ 		= $(SRC:.c=.o)
 
