@@ -6,7 +6,7 @@
 /*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 00:26:31 by khebert           #+#    #+#             */
-/*   Updated: 2025/12/21 00:48:25 by khebert          ###   ########.fr       */
+/*   Updated: 2026/01/05 13:07:10 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    push(t_stack **dst, t_stack **src)
     if (!*src)
         return ;
     temp = (*src);
-    (*src) = (*dst)->next;
+    (*src) = (*src)->next;
     temp->next = (*dst);
     (*dst) = temp;
 }
