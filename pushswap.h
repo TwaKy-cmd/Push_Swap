@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:22:57 by khebert           #+#    #+#             */
-/*   Updated: 2025/12/31 17:01:12 by khebert          ###   ########.fr       */
+/*   Updated: 2026/01/12 14:21:36 by twaky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 #include "../Libft/libft.h"
 
 typedef struct s_stack
@@ -25,6 +26,17 @@ typedef struct s_stack
     struct s_stack *next;
     struct s_stack *prev;
 } t_stack;
+
+/* FT_ALGO */
+
+int     size_of_stack(t_stack **stack);
+int     find_min(t_stack **stack);
+void    ft_three_big_number(t_stack *stack_a, int *big1, int *big2, int *big3);
+int     find_cible(t_stack **stack_a, int value);
+int     cost_a(t_stack *stack_a, int cible);
+int     cost_b(t_stack *stack_b, int value);
+int     calculate_the_cost(t_stack **stack_b, t_stack **stack_a, int cost, int cheapest_value);
+void    ft_turk_algo(t_stack **stack_a, t_stack **stack_b);
 
 /* FT_CONDITIONS.C */
 
@@ -74,5 +86,8 @@ void    swap(t_stack **stack_a);
 void    swap_sa(t_stack **stack_a);
 void    swap_sb(t_stack **stack_b);
 void    swap_ss(t_stack **stack_a, t_stack **stack_b);
+
+
+int     size_of_stack(t_stack **stack);
 
 #endif
