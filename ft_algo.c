@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_algo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:40:49 by twaky             #+#    #+#             */
-/*   Updated: 2026/01/13 18:14:16 by twaky            ###   ########.fr       */
+/*   Updated: 2026/01/13 23:01:49 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void    ft_three_big_number(t_stack *stack_a, int *big1, int *big2, int *big3)
             *big1 = temp->value;
         }   
         else if (temp->value > *big2)
+        {
+            *big3 = *big2;
             *big2 = temp->value;
+        }    
         else if (temp->value > *big3)
             *big3 = temp->value;
         temp = temp->next;
@@ -80,186 +83,4 @@ int     find_cible(t_stack **stack_a, int value)
         temp_a = temp_a->next;
     }
     return (cible);
-}
-
-int     cost_a(t_stack *stack_a, int cible)
-{
-    int pos_cible;
-    int size_a;
-    
-    if (cible == INT_MAX)
-        cible = find_min(&stack_a);
-    pos_cible = find_position(stack_a, cible);
-    size_a = size_of_stack(&stack_a);
-    if (pos_cible < size_a / 2)
-        return (pos_cible);
-    else
-        return (size_a - pos_cible);
-}
-
-int     cost_b(t_stack *stack_b, int value)
-{
-    int pos_b;
-    int cost_b;
-    int size_b;
-    
-    pos_b = find_position(stack_b, value);
-    size_b = size_of_stack(&stack_b);
-    if (pos_b < size_b/2)
-        cost_b = pos_b;
-    else
-        cost_b = (size_b - pos_b);
-    return (cost_b);
-}
-
-int     calculate_the_cost(t_stack **stack_b, t_stack **stack_a, int cost, int cheapest_value)
-{
-    t_stack *temp_a;
-    t_stack *temp_b;
-    int     temp_cost;
-    int     value;
-    int     cible;
-    
-    temp_b = *stack_b;
-    cost = INT_MAX;
-    cheapest_value = 0;
-    while (temp_b)
-    {
-        temp_a = *stack_a;
-        value = temp_b->value;
-        cible = find_cible(stack_a, value);
-        temp_cost = cost_b(*stack_b, value);
-        temp_cost += cost_a(*stack_a, cible) + 1;
-        if (temp_cost < cost)
-        {
-            cost = temp_cost;
-            cheapest_value = value;
-        }
-        temp_b = temp_b->next;
-    }
-    return (cheapest_value);
-}
-
-void    ft_turk_algo(t_stack **stack_a, t_stack **stack_b)
-{
-    int     big[3];
-    int     cheapest_value;
-    int     cible;
-    int     pos_b;
-    int     pos_cible;
-    int     cost_a;
-    int     cost_b;
-    int     is_ra;
-    int     is_rb;
-    
-    ft_three_big_number(*stack_a, &big[0], &big[1], &big[2]);
-    while (size_of_stack(stack_a) > 3)
-    {
-        if ((*stack_a)->value == big[0] || 
-            (*stack_a)->value == big[1] || 
-            (*stack_a)->value == big[2])
-            ra(stack_a);
-        else
-            push_pb(stack_a, stack_b);
-    }
-    three_args(stack_a);
-    while (*stack_b)
-    {
-        cheapest_value = calculate_the_cost(stack_b, stack_a, 0, cheapest_value);
-        pos_b = find_position(*stack_b, cheapest_value);
-        if (pos_b < size_of_stack(stack_b) / 2)
-        {
-            cost_b = pos_b;
-            is_rb = 1;
-        }
-        else
-        {
-            pos_b = (size_of_stack(stack_b) - pos_b);
-            cost_b = pos_b;
-            is_rb = 0;
-        }
-        cible = find_cible(stack_a, cheapest_value);
-        pos_cible = find_position(*stack_a, cible);
-        if (pos_cible < size_of_stack(stack_a) / 2)
-        {
-            cost_a = pos_cible;
-            is_ra = 1;
-        }   
-        else
-        {
-            pos_cible = (size_of_stack(stack_a) - pos_cible);
-            cost_a = pos_cible;
-            is_ra = 0;
-        }
-        if (is_ra == 1 && is_rb == 1)
-        {
-            if (cost_a >= cost_b)
-                while (cost_b > 0)
-                {
-                    rr(stack_a, stack_b);
-                    cost_b--;
-                    cost_a--;
-                }
-            else
-            {
-                while (cost_a > 0)
-                {
-                    rr(stack_a, stack_b);
-                    cost_a--;
-                    cost_b--;
-                }
-            }
-        }
-        if (is_ra == 0 && is_rb == 0)
-        {
-            if (cost_a >= cost_b)
-                while (cost_b > 0)
-                {
-                    rrr(stack_a, stack_b);
-                    cost_b--;
-                    cost_a--;
-                }
-            else
-            {
-                while (cost_a > 0)
-                {
-                    rrr(stack_a, stack_b);
-                    cost_a--;
-                    cost_b--;
-                }
-            }
-        }
-        if (pos_b < size_of_stack(stack_b) / 2)
-        {
-            while (pos_b-- > 0)
-                rb(stack_b);
-        }
-        else
-        {
-            pos_b = (size_of_stack(stack_b) - pos_b);
-            while (pos_b-- > 0)
-                rrb(stack_b);
-        }
-        if (pos_cible < size_of_stack(stack_a) / 2)
-            while (pos_cible-- > 0)
-                ra(stack_a);
-        else
-        {
-            pos_cible = (size_of_stack(stack_a) - pos_cible);
-            while (pos_cible-- > 0)
-                rra(stack_a);
-        }
-        push_pa(stack_a, stack_b);
-    } 
-    cheapest_value = find_min(stack_a);
-    pos_cible = find_position(*stack_a, cheapest_value);
-    if (pos_cible < size_of_stack(stack_a) / 2)
-        while (pos_cible-- > 0)
-            ra(stack_a);
-    else
-    {
-        pos_cible = (size_of_stack(stack_a) - pos_cible);
-        while (pos_cible-- > 0)
-            rra(stack_a);
-    }
 }
