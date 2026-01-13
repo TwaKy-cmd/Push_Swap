@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_algo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 16:40:49 by twaky             #+#    #+#             */
-/*   Updated: 2026/01/12 14:21:01 by twaky            ###   ########.fr       */
+/*   Updated: 2026/01/13 17:06:26 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int find_min(t_stack **stack)
     {
         if (temp->value < min)
             min = temp->value;
-        stack = temp->next;
+        temp = temp->next;
     }
     return (min);
 }
@@ -88,9 +88,9 @@ int     cost_a(t_stack *stack_a, int cible)
     int size_a;
     
     if (cible == INT_MAX)
-        cible = find_min(stack_a);
+        cible = find_min(&stack_a);
     pos_cible = find_position(stack_a, cible);
-    size_a = size_of_stack(stack_a);
+    size_a = size_of_stack(&stack_a);
     if (pos_cible < size_a / 2)
         return (pos_cible);
     else
@@ -104,7 +104,7 @@ int     cost_b(t_stack *stack_b, int value)
     int size_b;
     
     pos_b = find_position(stack_b, value);
-    size_b = size_of_stack(stack_b);
+    size_b = size_of_stack(&stack_b);
     if (pos_b < size_b/2)
         cost_b = pos_b;
     else
@@ -144,12 +144,11 @@ void    ft_turk_algo(t_stack **stack_a, t_stack **stack_b)
 {
     int     big[3];
     int     cheapest_value;
-    int     cost;
     int     cible;
     int     pos_b;
     int     pos_cible;
     
-    ft_three_big_number(stack_a, &big[0], &big[1], &big[2]);
+    ft_three_big_number(*stack_a, &big[0], &big[1], &big[2]);
     while (size_of_stack(stack_a) > 3)
     {
         if ((*stack_a)->value == big[0] || 
@@ -162,8 +161,8 @@ void    ft_turk_algo(t_stack **stack_a, t_stack **stack_b)
     three_args(stack_a);
     while (*stack_b)
     {
-        cheapest_value = calculate_the_cost(stack_b, stack_a, cost, cheapest_value);
-        pos_b = find_position(stack_b, cheapest_value);
+        cheapest_value = calculate_the_cost(stack_b, stack_a, 0, cheapest_value);
+        pos_b = find_position(*stack_b, cheapest_value);
         if (pos_b < size_of_stack(stack_b) / 2)
         {
             while (pos_b-- > 0)
@@ -200,13 +199,3 @@ void    ft_turk_algo(t_stack **stack_a, t_stack **stack_b)
             rra(stack_a);
     }
 }
-
-    /* ordre : 
-    - Prendre les 3 plus grand nombre de a et les garder dans a mettre le reste a b
-    - Trier les 3 gros nombre (dans function turk)
-    - Calculer pour chaque nombre sont nombre de cout et stocker le minimum
-        - En fonction de :
-            - sa position dans stack b on calcul le coup
-    - Trouver l'emplacement du minimum dans A et y placer le nombre
-    - Verifier que A soit bien trier.
-    */

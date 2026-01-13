@@ -6,11 +6,11 @@
 #    By: khebert <khebert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/19 13:58:12 by khebert           #+#    #+#              #
-#    Updated: 2025/12/22 18:14:01 by khebert          ###   ########.fr        #
+#    Updated: 2026/01/13 16:43:58 by khebert          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= push_swap.a
+NAME		= push_swap
 LIBFT_DIR 	= ./Libft
 LIBFT 		= $(LIBFT_DIR)/libft.a
 
@@ -18,7 +18,8 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 rm			= rm -f
 
-SRC			=	ft_parsing.c 			\
+SRC			=	ft_algo.c				\
+				ft_parsing.c 			\
 				ft_push.c 				\
 				ft_reverse_rotate.c 	\
 				ft_rotate.c 			\

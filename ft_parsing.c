@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: twaky <twaky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 16:48:44 by khebert           #+#    #+#             */
-/*   Updated: 2026/01/12 14:26:24 by twaky            ###   ########.fr       */
+/*   Updated: 2026/01/13 16:52:02 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int main(int argc, char **argv)
 {
     t_stack *stack_a;
     t_stack *stack_b;
-    int     size;
     
     if (argc >= 2)
     {
@@ -93,30 +92,29 @@ int main(int argc, char **argv)
         stack_b = NULL;
         if (is_sorted(stack_a))
             return (0);
-        size = size_of_stack(stack_a);
-        if (size == 2)
+        if (argc == 3)
         {
             two_args(&stack_a);
-            ft_print_stack(stack_a);
-            write(1, "\n", 1);
+            ////ft_print_stack(stack_a);
+            //write(1, "\n", 1);
         }
-        else if (size == 3)
+        else if (argc == 4)
         {
             three_args(&stack_a);
-            ft_print_stack(stack_a);
-            write(1, "\n", 1);
+            ////ft_print_stack(stack_a);
+            ///write(1, "\n", 1);
         }
-        else if (size == 5)
+        else if (argc == 6)
         {
             five_args(&stack_a, &stack_b);
-            ft_print_stack(stack_a);
-            write(1, "\n", 1);
+            ////ft_print_stack(stack_a);
+            ///write(1, "\n", 1);
         }
         else
         {
             ft_turk_algo(&stack_a, &stack_b);
-            ft_print_stack(stack_a);
-            write(1, "\n", 1);
+            ///ft_print_stack(stack_a);
+            ///write(1, "\n", 1);
         }
         free(stack_a);
         if (stack_b)
