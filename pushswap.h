@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:22:57 by khebert           #+#    #+#             */
-/*   Updated: 2026/01/13 23:20:41 by khebert          ###   ########.fr       */
+/*   Updated: 2026/01/14 01:50:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ typedef struct s_stack
 	struct s_stack *next;
 	struct s_stack *prev;
 } t_stack;
+
+typedef struct s_turk_data
+{
+    int is_ra;
+    int is_rb;
+    int cost_a;
+    int cost_b;
+    int pos_a;
+    int pos_b;
+    int cheapest_value;
+    int cible;
+} t_turk_data;
 
 /* FT_ALGO */
 
