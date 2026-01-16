@@ -6,7 +6,7 @@
 #    By: khebert <khebert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/19 13:58:12 by khebert           #+#    #+#              #
-#    Updated: 2026/01/13 23:26:59 by khebert          ###   ########.fr        #
+#    Updated: 2026/01/16 17:22:47 by khebert          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC			=	ft_algo.c				\
 				ft_struct.c 			\
 				ft_swap.c 				\
 				ft_turk.c				\
+				ft_main.c				\
 	
 OBJ 		= $(SRC:.c=.o)
 

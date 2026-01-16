@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_turk.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 22:57:57 by khebert           #+#    #+#             */
-/*   Updated: 2026/01/14 02:24:17 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/16 17:45:23 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 void	ft_take_cible(t_stack **stack_a, t_stack **stack_b, t_turk_data *data)
 {
-	data->cheapest_value = calculate_the_cost(stack_b, stack_a, 0, 0);
-    data->pos_b = find_position(*stack_b, data->cheapest_value);
+	data->cheapest_value = calculate_the_cost(stack_b, stack_a, data);
+	data->pos_b = find_position(*stack_b, data->cheapest_value);
 	if (data->pos_b < size_of_stack(stack_b) / 2)
 	{
-   		data->cost_b = data->pos_b;
-    	data->is_rb = 1;
+		data->cost_b = data->pos_b;
+		data->is_rb = 1;
 	}
 	else
-    {
-        data->cost_b = (size_of_stack(stack_b) - data->pos_b);
-        data->is_rb = 0;
-    }
-    data->cible = find_cible(stack_a, data->cheapest_value);
-    data->pos_cible = find_position(*stack_a, data->cible);
-    if (data->pos_cible < size_of_stack(stack_a) / 2)
-    {
-        data->cost_a = data->pos_cible;
-        data->is_ra = 1;
-    }   
-    else
-    {
-        data->cost_a = (size_of_stack(stack_a) - data->pos_cible);
-        data->is_ra = 0;
-    }
+	{
+		data->cost_b = (size_of_stack(stack_b) - data->pos_b);
+		data->is_rb = 0;
+	}
+	data->cible = find_cible(stack_a, data->cheapest_value);
+	data->pos_cible = find_position(*stack_a, data->cible);
+	if (data->pos_cible < size_of_stack(stack_a) / 2)
+	{
+		data->cost_a = data->pos_cible;
+		data->is_ra = 1;
+	}
+	else
+	{
+		data->cost_a = (size_of_stack(stack_a) - data->pos_cible);
+		data->is_ra = 0;
+	}
 }
 
 void	ft_cost(t_stack **stack_b, t_stack **stack_a, t_turk_data *data)
@@ -60,6 +60,11 @@ void	ft_cost(t_stack **stack_b, t_stack **stack_a, t_turk_data *data)
 			data->cost_b--;
 		}
 	}
+	ft_cost_2(stack_b, stack_a, data);
+}
+
+void	ft_cost_2(t_stack **stack_b, t_stack **stack_a, t_turk_data *data)
+{
 	while (data->cost_a > 0)
 	{
 		if (data->is_ra)
@@ -92,17 +97,18 @@ void	ft_total_sort(t_stack **stack_a, t_turk_data *data)
 			rra(stack_a);
 	}
 }
-void    ft_turk_algo(t_stack **stack_a, t_stack **stack_b)
+
+void	ft_turk_algo(t_stack **stack_a, t_stack **stack_b)
 {
-	int     	big[3];
-	t_turk_data data = {0};  // ← Initialise tout à 0 !
+	t_turk_data	data;
+	int			big[3];
 
 	ft_three_big_number(*stack_a, &big[0], &big[1], &big[2]);
 	while (size_of_stack(stack_a) > 3)
 	{
-		if ((*stack_a)->value == big[0] || 
-			(*stack_a)->value == big[1] || 
-			(*stack_a)->value == big[2])
+		if ((*stack_a)->value == big[0]
+			|| (*stack_a)->value == big[1]
+			|| (*stack_a)->value == big[2])
 			ra(stack_a);
 		else
 			push_pb(stack_a, stack_b);
@@ -111,7 +117,7 @@ void    ft_turk_algo(t_stack **stack_a, t_stack **stack_b)
 	while (*stack_b)
 	{
 		ft_take_cible(stack_a, stack_b, &data);
-		ft_cost(stack_a, stack_b, &data);
+		ft_cost(stack_b, stack_a, &data);
 		push_pa(stack_a, stack_b);
 	}
 	ft_total_sort(stack_a, &data);
