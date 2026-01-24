@@ -6,7 +6,7 @@
 /*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:22:09 by khebert           #+#    #+#             */
-/*   Updated: 2026/01/24 16:58:21 by khebert          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:52:11 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ int	is_valid_number(char *str)
 	return (0);
 }
 
-int	verificate_errors(char **argv, t_stack *stack_a)
+int	verificate_errors(char **argv, t_stack *stack_a, int i)
 {
-	int		i;
 	long	nb;
 
-	i = 0;
-	if (is_valid_number(argv[i]) == 1)
+	if (is_valid_number(argv[i]))
 	{
 		ft_putstr_fd("Error\n", 2);
 		free_stack(&stack_a);
@@ -49,7 +47,7 @@ int	verificate_errors(char **argv, t_stack *stack_a)
 		free_stack(&stack_a);
 		return (1);
 	}
-	if (is_double(stack_a) == 1)
+	if (is_double(stack_a))
 	{
 		ft_putstr_fd("Error\n", 2);
 		free_stack(&stack_a);
@@ -62,11 +60,12 @@ int	check_errors(int argc, char **argv, t_stack *stack_a)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (i < argc)
 	{
-		if (verificate_errors(argv, stack_a) == 1)
+		if (verificate_errors(argv, stack_a, i))
 			return (1);
+		i++;
 	}
 	return (0);
 }
@@ -80,7 +79,7 @@ int	main(int argc, char **argv)
 	{
 		stack_a = ft_parse_args(argc, argv);
 		stack_b = NULL;
-		if (check_errors(argc, argv, stack_a) == 1)
+		if (check_errors(argc, argv, stack_a))
 			exit(1);
 		if (is_sorted(stack_a))
 			return (0);

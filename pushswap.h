@@ -6,7 +6,7 @@
 /*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:22:57 by khebert           #+#    #+#             */
-/*   Updated: 2026/01/24 16:59:14 by khebert          ###   ########.fr       */
+/*   Updated: 2026/01/24 18:53:01 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ int			cost_b(t_stack *stack_b, int value);
 int			calculate_the_cost(t_stack **stack_b, t_stack **stack_a,
 				t_turk_data *data);
 
+/* FT_FIVE_ARGS.C */
+
+void		pos_five_args(t_stack **stack_a, int pos);
+void		five_args(t_stack **stack_a, t_stack **stack_b);
+
 /* FT_TURK.C */
 
 void		ft_take_cible(t_stack **stack_a, t_stack **stack_b,
@@ -70,7 +75,6 @@ int			is_sorted(t_stack *stack);
 int			is_double(t_stack *stack);
 void		two_args(t_stack **stack);
 void		three_args(t_stack **stack);
-void		five_args(t_stack **stack_a, t_stack **stack_b);
 
 /* FT_SPLIT.C */
 
@@ -97,7 +101,7 @@ void		ft_putstr_fd(char *str, int fd);
 /* FT_MAIN.C */
 
 int			is_valid_number(char *str);
-int			verificate_errors(char **argv, t_stack *stack_a);
+int			verificate_errors(char **argv, t_stack *stack_a, int i);
 int			check_errors(int argc, char **argv, t_stack *stack_a);
 int			main(int argc, char **argv);
 

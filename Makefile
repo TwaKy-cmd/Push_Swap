@@ -6,7 +6,7 @@
 #    By: khebert <khebert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/19 13:58:12 by khebert           #+#    #+#              #
-#    Updated: 2026/01/24 17:01:27 by khebert          ###   ########.fr        #
+#    Updated: 2026/01/24 18:51:33 by khebert          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ rm			= rm -f
 SRC			=	ft_algo.c				\
 				ft_condition.c 			\
 				ft_cost.c				\
+				ft_five_args.c			\
 				ft_libft.c 				\
 				ft_main.c				\
 				ft_parsing.c 			\
