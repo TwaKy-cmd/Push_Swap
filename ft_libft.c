@@ -6,17 +6,17 @@
 /*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 23:16:37 by khebert           #+#    #+#             */
-/*   Updated: 2026/01/16 17:31:46 by khebert          ###   ########.fr       */
+/*   Updated: 2026/01/24 16:40:38 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	res;
-	int	sign;
-	int	i;
+	long	res;
+	int		sign;
+	int		i;
 
 	i = 0;
 	res = 0;
@@ -33,6 +33,8 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = res * 10 + (str[i] - 48);
+		if (res * sign > INT_MAX || res * sign < INT_MIN)
+			return (LONG_MAX);
 		i++;
 	}
 	return (res * sign);
@@ -62,5 +64,19 @@ void	ft_putnbr_fd(int n, int fd)
 	{
 		ft_putnbr_fd(n / 10, fd);
 		ft_putnbr_fd(n % 10, fd);
+	}
+}
+
+void	ft_putstr_fd(char *str, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+	{
+		write(fd, &str[i], 1);
+		i++;
 	}
 }

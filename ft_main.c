@@ -6,11 +6,70 @@
 /*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 17:22:09 by khebert           #+#    #+#             */
-/*   Updated: 2026/01/16 17:52:18 by khebert          ###   ########.fr       */
+/*   Updated: 2026/01/24 16:58:21 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+int	is_valid_number(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	if (!str[i])
+		return (1);
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	verificate_errors(char **argv, t_stack *stack_a)
+{
+	int		i;
+	long	nb;
+
+	i = 0;
+	if (is_valid_number(argv[i]) == 1)
+	{
+		ft_putstr_fd("Error\n", 2);
+		free_stack(&stack_a);
+		return (1);
+	}
+	nb = ft_atoi(argv[i]);
+	if (nb == LONG_MAX)
+	{
+		ft_putstr_fd("Error\n", 2);
+		free_stack(&stack_a);
+		return (1);
+	}
+	if (is_double(stack_a) == 1)
+	{
+		ft_putstr_fd("Error\n", 2);
+		free_stack(&stack_a);
+		return (1);
+	}
+	return (0);
+}
+
+int	check_errors(int argc, char **argv, t_stack *stack_a)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc)
+	{
+		if (verificate_errors(argv, stack_a) == 1)
+			return (1);
+	}
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -21,6 +80,8 @@ int	main(int argc, char **argv)
 	{
 		stack_a = ft_parse_args(argc, argv);
 		stack_b = NULL;
+		if (check_errors(argc, argv, stack_a) == 1)
+			exit(1);
 		if (is_sorted(stack_a))
 			return (0);
 		if (argc == 3)

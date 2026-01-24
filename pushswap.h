@@ -6,7 +6,7 @@
 /*   By: khebert <khebert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:22:57 by khebert           #+#    #+#             */
-/*   Updated: 2026/01/16 17:49:54 by khebert          ###   ########.fr       */
+/*   Updated: 2026/01/24 16:59:14 by khebert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		ft_turk_algo(t_stack **stack_a, t_stack **stack_b);
 /* FT_CONDITIONS.C */
 
 int			is_sorted(t_stack *stack);
+int			is_double(t_stack *stack);
 void		two_args(t_stack **stack);
 void		three_args(t_stack **stack);
 void		five_args(t_stack **stack_a, t_stack **stack_b);
@@ -89,8 +90,16 @@ int			ft_min(t_stack *stack);
 
 /* FT_LIBFT.C */
 
-int			ft_atoi(const char *str);
+long		ft_atoi(const char *str);
 void		ft_putnbr_fd(int n, int fd);
+void		ft_putstr_fd(char *str, int fd);
+
+/* FT_MAIN.C */
+
+int			is_valid_number(char *str);
+int			verificate_errors(char **argv, t_stack *stack_a);
+int			check_errors(int argc, char **argv, t_stack *stack_a);
+int			main(int argc, char **argv);
 
 /* FT_PARSING.C */
 
@@ -98,7 +107,6 @@ t_stack		*ft_split_args(char *argv);
 t_stack		*ft_parse_args(int argc, char *argv[]);
 void		ft_print_stack(t_stack *stack);
 void		free_stack(t_stack **stack);
-int			main(int argc, char **argv);
 
 /* FT_PUSH.C */
 

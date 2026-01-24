@@ -33,7 +33,7 @@ khebert / TwaKy Project !
                     five_args(&stack_a, &stack_b);
                 else
                     ft_turk_algo(&stack_a, &stack_b);
-                ft_print_stack(stack_a)
+                ft_print_stack(stack_a);
                 free_stack(&stack_a);
                 if (stack_b)
                     free_stack(&stack_b);
@@ -83,7 +83,7 @@ khebert / TwaKy Project !
                     five_args(&stack_a, &stack_b);
                 else
                     ft_turk_algo(&stack_a, &stack_b);
-                ft_print_stack(stack_a)
+                ft_print_stack(stack_a);
                 free_stack(&stack_a);
                 if (stack_b)
                     free_stack(&stack_b);
