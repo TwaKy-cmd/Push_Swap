@@ -14,15 +14,17 @@ khebert / TwaKy Project !
 - In order to be able to test the project, you can follow the following steps: 
     - In the ft_main. c, replace the existing hand with the following hand, so that you can display the result:
 
-        int main(int argc, char **argv)
+        int	main(int argc, char **argv)
         {
-            t_stack *stack_a;
-            t_stack *stack_b;
-    
+            t_stack	*stack_a;
+            t_stack	*stack_b;
+
             if (argc >= 2)
             {
                 stack_a = ft_parse_args(argc, argv);
                 stack_b = NULL;
+                if (check_errors(argc, argv, stack_a))
+                    exit(1);
                 if (is_sorted(stack_a))
                     return (0);
                 if (argc == 3)
@@ -33,8 +35,8 @@ khebert / TwaKy Project !
                     five_args(&stack_a, &stack_b);
                 else
                     ft_turk_algo(&stack_a, &stack_b);
-                ft_print_stack(stack_a);
                 free_stack(&stack_a);
+                ft_print_stack(stack_a);
                 if (stack_b)
                     free_stack(&stack_b);
             }
@@ -64,15 +66,17 @@ khebert / TwaKy Project !
 - Afin de pouvoir tester le projet, vous pouvez suivre les étapes suivantes : 
     - Dans le ft_main.c, remplacez le main existant par le main suivant, afin de pouvoir afficher le résultat :
 
-        int main(int argc, char **argv)
+        int	main(int argc, char **argv)
         {
-            t_stack *stack_a;
-            t_stack *stack_b;
-    
+            t_stack	*stack_a;
+            t_stack	*stack_b;
+
             if (argc >= 2)
             {
                 stack_a = ft_parse_args(argc, argv);
                 stack_b = NULL;
+                if (check_errors(argc, argv, stack_a))
+                    exit(1);
                 if (is_sorted(stack_a))
                     return (0);
                 if (argc == 3)
@@ -83,8 +87,8 @@ khebert / TwaKy Project !
                     five_args(&stack_a, &stack_b);
                 else
                     ft_turk_algo(&stack_a, &stack_b);
-                ft_print_stack(stack_a);
                 free_stack(&stack_a);
+                ft_print_stack(stack_a);
                 if (stack_b)
                     free_stack(&stack_b);
             }
